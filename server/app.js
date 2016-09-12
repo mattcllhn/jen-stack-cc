@@ -1,5 +1,6 @@
 // initial jokes provided by the client
-jokes = [
+
+var jokes = [
   {
     whoseJoke: "Huck",
     jokeQuestion: "What's the difference between roast beef and pea soup?",
@@ -32,3 +33,16 @@ app.get('/', function(req,res){
   console.log('base url hit');
   res.sendFile('public/index.html');
 });//app.get
+app.post('/', urlEncodedParser, function(req, res){
+  console.log('in the app.post',req.body);
+
+  var newJoke=req.body;
+  if(newJoke.whoseJoke!==undefined){
+    jokes.push(newJoke);
+    res.send(jokes);
+  }else{
+  res.send(jokes);
+}
+console.log('jokes variable in app.js',jokes);
+
+});//app.post
